@@ -1,15 +1,18 @@
-import { React, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MatchDetailCard } from '../components/MatchDetailCard';
 import { MatchSmallCard } from '../components/MatchSmallCard';
+import { useParams } from 'react-router-dom';
 
 export const TeamPage = () => {
 
   const [team, setTeam] = useState({matches:[]});
+  const { teamName } = useParams();
 
   useEffect(
     () => {
+      console.log(teamName)
       const fetchMatches = async () => {
-        const response = await fetch('http://localhost:8080/team/Chennai%20Super%20Kings');
+        const response = await fetch(`http://localhost:8080/team/${teamName}`);
         const data = await response.json();
         setTeam(data);
       };
